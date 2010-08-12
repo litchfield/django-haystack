@@ -373,13 +373,11 @@ class SearchQuerySet(object):
     
     def count(self):
         """Returns the total number of matching results."""
-        clone = self._clone()
-        return len(clone)
+        return len(self)
     
     def best_match(self):
         """Returns the best/top search result that matches the query."""
-        clone = self._clone()
-        return clone[0]
+        return self[0]
     
     def latest(self, date_field):
         """Returns the most recent search result that matches the query."""
@@ -401,8 +399,7 @@ class SearchQuerySet(object):
         This will cause the query to execute and should generally be used when
         presenting the data.
         """
-        clone = self._clone()
-        return clone.query.get_facet_counts()
+        return self.query.get_facet_counts()
     
     def spelling_suggestion(self, preferred_query=None):
         """
@@ -414,8 +411,7 @@ class SearchQuerySet(object):
         This will cause the query to execute and should generally be used when
         presenting the data.
         """
-        clone = self._clone()
-        return clone.query.get_spelling_suggestion(preferred_query)
+        return self.query.get_spelling_suggestion(preferred_query)
     
     
     # Utility methods.
